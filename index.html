@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b1d27">
+  <title>Damas con amigos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="netBanner" class="hidden">📡 Sin conexión… reconectando</div>
+
+  <!-- ============ LOBBY ============ -->
+  <section id="lobby" class="screen">
+    <div class="card lobby-card">
+      <h1>♛ Damas con amigos</h1>
+      <p class="sub">Dos juegan, los demás miran, chatean y se burlan.</p>
+
+      <label class="field">
+        <span>Tu apodo</span>
+        <input id="name" maxlength="20" autocomplete="nickname" placeholder="Ej: Messi">
+      </label>
+
+      <button id="btnCreate" class="btn primary big">➕ Crear sala</button>
+
+      <div class="or"><span>o únete con un código</span></div>
+
+      <div class="row">
+        <input id="code" maxlength="8" autocapitalize="characters" autocomplete="off" placeholder="CÓDIGO">
+        <button id="btnJoin" class="btn big">Unirse</button>
+      </div>
+      <p id="lobbyError" class="error"></p>
+    </div>
+  </section>
+
+  <!-- ============ JUEGO ============ -->
+  <section id="game" class="screen hidden">
+    <header class="topbar">
+      <div class="room">Sala <strong id="roomCode">-----</strong></div>
+      <div id="counts" class="counts"></div>
+      <div class="top-actions">
+        <button id="btnShare" class="btn small" title="Compartir enlace">🔗 Invitar</button>
+        <button id="btnMute" class="btn small" title="Sonido">🔊</button>
+        <button id="btnLeave" class="btn small danger" title="Salir de la sala">Salir</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <div class="boardCol">
+        <div id="playerTop" class="playerBar"></div>
+        <div id="status" class="status"></div>
+
+        <div class="boardWrap">
+          <div id="board" aria-label="Tablero de damas"></div>
+          <div id="floaters"></div>
+          <div id="overlay" class="overlay hidden"></div>
+        </div>
+
+        <div id="playerBottom" class="playerBar"></div>
+        <div id="actions" class="actions"></div>
+      </div>
+
+      <aside class="side">
+        <div class="panel">
+          <h3>😜 Burlas y reacciones</h3>
+          <div id="reactions" class="reactions"></div>
+        </div>
+
+        <div class="panel chat">
+          <h3>💬 Chat</h3>
+          <div id="messages" class="messages"></div>
+          <form id="chatForm" class="chatForm" autocomplete="off">
+            <input id="chatInput" maxlength="200" placeholder="Escribe un mensaje…">
+            <button class="btn primary" type="submit">Enviar</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>👥 En la sala</h3>
+          <div id="people" class="people"></div>
+        </div>
+      </aside>
+    </main>
+  </section>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
